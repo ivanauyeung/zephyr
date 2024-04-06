@@ -117,3 +117,6 @@ assets/
 
 # Output directories
 */outputs
+outputs
+notebooks
+*/notebooks

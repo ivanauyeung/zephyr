@@ -191,6 +191,15 @@ class TimeSeriesDataModule():
                                   batch_size=self.batch_size)
         else:
             if self.prebuilt_dataset:
+                print("src_directory= ", self.src_directory, " dst_directory= ", self.dst_directory,
+                    " dataset_name= ", self.dataset_name,
+                    " input_variables= ", self.input_variables,
+                    " output_variables= ", self.output_variables,
+                    " constants= ", self.constants,
+                    " prefix= ", self.prefix,
+                    " suffix= ", self.suffix,
+                    " batch_size= ", self.dataset_batch_size,
+                    " scaling= ", self.scaling)
                 create_fn(
                     src_directory=self.src_directory,
                     dst_directory=self.dst_directory,

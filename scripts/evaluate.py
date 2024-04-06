@@ -9,6 +9,8 @@ import multiprocessing
 import xarray as xr
 
 import matplotlib.pyplot as plt
+import sys
+sys.path.append('/home/disk/brume/adod/zephyr')
 
 from evaluation.evaluators import EvaluatorBase
 

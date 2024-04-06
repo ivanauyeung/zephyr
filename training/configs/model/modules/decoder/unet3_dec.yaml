@@ -5,7 +5,7 @@ defaults:
   - /model/modules/blocks@skip_block: skip_block
   - /model/modules/blocks@output_layer: output_layer
 
-_target_: training.dlwp.model.models.unet.UNet3Decoder
+_target_: training.dlwp.model.modules.decoder.UNetDecoder
 _recursive_: false
 n_channels:
   - 256

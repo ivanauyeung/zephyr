@@ -1,7 +1,7 @@
 defaults:
-  - /model/modules/blocks@conv_block: basic_conv_block
+  - /model/modules/blocks@conv_block: conv_next_block
   - /model/modules/blocks@up_sampling_block: transposed_conv_upsample
-  - /model/modules/blocks@recurrent_block: null
+  - /model/modules/blocks@lstm_block: conv_lstm_block
   - /model/modules/blocks@output_layer: output_layer
 
 _target_: training.dlwp.model.modules.decoder.UNetDecoder

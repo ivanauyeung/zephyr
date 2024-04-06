@@ -5,6 +5,7 @@ from omegaconf import DictConfig
 import torch as th
 
 from training.dlwp.model.modules.cube_sphere import CubeSpherePadding, CubeSphereLayer
+from training.dlwp.model.modules.blocks.ConvLSTMBlock import ConvLSTMBlock
 
 
 class CubeSphereUNetDecoder(th.nn.Module):
@@ -141,6 +142,7 @@ class UNetDecoder(th.nn.Module):
             up_sampling_block: DictConfig,
             output_layer: DictConfig,
             recurrent_block: DictConfig = None,
+            lstm_block: DictConfig = None,
             n_channels: Sequence = (64, 32, 16),
             n_layers: Sequence = (1, 2, 2),
             output_channels: int = 1,
@@ -193,6 +195,18 @@ class UNetDecoder(th.nn.Module):
                     in_channels=next_channel,
                     enable_healpixpad=enable_healpixpad
                     )
+            elif lstm_block is not None:
+                #replace the last conv with just this module
+                rec_module = instantiate(
+                    config=lstm_block,
+                    in_channels=next_channel, 
+                    latent_channels=next_channel,
+                    out_channels=next_channel,
+                    dilation=dilations[n],
+                    n_layers=n_layers[n],
+                    enable_nhwc=enable_nhwc,
+                    enable_healpixpad=enable_healpixpad
+                )
             else:
                 rec_module = None
 
@@ -226,7 +240,10 @@ class UNetDecoder(th.nn.Module):
 
     def reset(self):
         for layer in self.decoder:
-            layer["recurrent"].reset()
+            if layer["recurrent"] is not None:
+                layer["recurrent"].reset()
+            if isinstance(layer["conv"], ConvLSTMBlock):
+                layer["conv"].reset()
 
 
 class UNet3Decoder(th.nn.Module):
