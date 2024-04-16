@@ -84,7 +84,7 @@ enable_healpixpad=True
 NUM_GPU=1
 NUM_CPU=16
 GPU_NAME=A100
-DEVICE_NUMBERS="3"
+DEVICE_NUMBERS="2"
 NUMEXPR_MAX_THREADS=128
 EXP_NAME="hpx64_gru_1x1${seed}"
 OUTPUT_DIR="/home/disk/brume/adod/zephyr/outputs/${EXP_NAME}"
@@ -123,7 +123,7 @@ experiment_name=${EXP_NAME} model=${model} \
   data.prebuilt_dataset=${prebuilt_dataset} \
   data.module.drop_last=${drop_last} \
   trainer/lr_scheduler=${lr_scheduler} \
-  trainer/optimizer=${optimizer} \
+  trainer/optimizer=${optimizer} 
   model.enable_healpixpad=${enable_healpixpad}"
 
 # Run model
