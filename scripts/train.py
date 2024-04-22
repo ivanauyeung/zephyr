@@ -118,10 +118,14 @@ def train(cfg):
                         state[k] = v.to(device=device)
             # Optionally load scheduler
             if lr_scheduler is not None: lr_scheduler.load_state_dict(checkpoint["scheduler_state_dict"])
-        epoch = checkpoint["epoch"]
-        val_error = checkpoint["val_error"]
-        iteration = checkpoint["iteration"]
-        epochs_since_improved = checkpoint["epochs_since_improved"] if "epochs_since_improved" in checkpoint.keys() else 0
+            epoch = checkpoint["epoch"]
+            val_error = checkpoint["val_error"]
+            iteration = checkpoint["iteration"]
+            epochs_since_improved = checkpoint["epochs_since_improved"] if "epochs_since_improved" in checkpoint.keys() else 0
+        epoch = 0
+        val_error = th.inf
+        iteration = 0
+        epochs_since_improved = 0
     else:
         epoch = 0
         val_error = th.inf

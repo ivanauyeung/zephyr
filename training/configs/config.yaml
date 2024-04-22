@@ -1,11 +1,11 @@
 defaults:
   - _self_
-  - data: era5_hpx64_7var_6h_24h
+  - data: era5_hpx128_7var_6h_24h_pd
   - model: hpx_unet
-  - trainer: default
+  - trainer: default_pd
 
 experiment_name: ${now:%Y-%m-%d}/${now:%H-%M-%S}
-output_dir: outputs/${experiment_name}
+output_dir: /home/disk/brume/morenor/outputs/${experiment_name}
 checkpoint_name: null
 load_weights_only: false
 seed: 0

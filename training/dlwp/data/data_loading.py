@@ -206,9 +206,12 @@ def create_time_series_dataset_classic(
     if constants is not None:
         constants_ds = []
         for name, var in constants.items():
-            constants_ds.append(xr.open_dataset(
+            ds_tmp = xr.open_dataset( 
                 get_file_name(src_directory, name)
-                ).set_coords(['lat', 'lon'])[var].astype(np.float32))
+                ).set_coords(['lat', 'lon']).astype(np.float32)
+            if "predictors" in list(ds_tmp.keys()):
+                ds_tmp = ds_tmp.rename({"predictors": var})
+            constants_ds.append(ds_tmp[var].copy())
         constants_ds = xr.merge(constants_ds, compat='override')
         constants_da = constants_ds.to_array('channel_c', name='constants').transpose(
             'channel_c', 'face', 'height', 'width')

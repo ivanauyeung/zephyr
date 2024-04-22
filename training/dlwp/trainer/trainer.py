@@ -366,7 +366,8 @@ Could be that criterion is not compatable with custom loss dlwp training. See \
 
                         # Same for the per-variable loss
                         for v_idx, v_name in enumerate(self.output_variables):
-                            validation_stats[1+v_idx] += self.static_losses_eval[v_idx] * bsize
+                            #validation_stats[1+v_idx] += self.static_losses_eval[v_idx] * bsize
+                            validation_stats[1+v_idx] += self.static_losses_eval * bsize ###TEMP FIX
                     else:
                         if self.amp_enable:
                             with amp.autocast(enabled=self.amp_enable, dtype=self.amp_dtype):
@@ -375,7 +376,8 @@ Could be that criterion is not compatable with custom loss dlwp training. See \
                                 # save per variable loss
                                 eval_losses = self.criterion(output, target, average_channels=False)
                                 for v_idx, v_name in enumerate(self.output_variables):
-                                    validation_stats[1+v_idx] += eval_losses[v_idx] * bsize
+                                    #validation_stats[1+v_idx] += eval_losses[v_idx] * bsize
+                                    validation_stats[1+v_idx] += eval_losses * bsize
                         else:
                             output = self.model(inputs)
                             validation_stats[0] += self.criterion(prediction=output, target=target) * bsize

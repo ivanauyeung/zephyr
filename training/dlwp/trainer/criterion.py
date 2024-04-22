@@ -35,6 +35,30 @@ class BaseMSE( th.nn.MSELoss ):
         else: 
             return d
 
+class LogLoss( th.nn.MSELoss ):
+    """
+    Loss for precipitation diagnostic model
+    """
+    def __init__(
+        self,
+        b=None,
+        w=1,
+
+        ):
+        super().__init__()
+        self.b = b
+        self.device = None
+        self.w = w
+    def setup(self, trainer):
+        self.b = th.tensor(self.b,device=trainer.device)
+        self.w = th.tensor(self.w,device=trainer.device)
+    def forward(self, prediction, target, average_channels=True ):
+        
+        #loss = self.w*th.sum(th.exp(self.b*prediction)*(target-prediction)**2)
+        #loss = ((th.exp(self.b*prediction)*(target-prediction)**2).mean(dim=(0,1,2,4,5)))*self.w
+        loss = (th.mean(th.exp(self.b*prediction)*(target-prediction)**2))*self.w 
+        return loss
+
 class WeightedMSE( th.nn.MSELoss ):
 
     """

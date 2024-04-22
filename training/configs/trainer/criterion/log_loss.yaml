@@ -1,0 +1,2 @@
+_target_: training.dlwp.trainer.criterion.LogLoss
+b: 0.2
