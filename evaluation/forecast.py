@@ -29,7 +29,7 @@ params = param_dict({
     'output_filename' : '209_forecasts_hpx64_unet_136-68-34_cnxt_skip_dil_gru_6h_300', # filename for the forecast
     'encode_int' : False,
     'to_zarr' : False,
-    'data_directory' : '/home/quicksilver2/karlbam/Data/DLWP/HPX64', # location of data to use for the forecast
+    'data_directory' : '/home/disk/quicksilver2/karlbam/Data/DLWP/HPX64', # location of data to use for the forecast
     'data_prefix' : None,
     'data_suffix' : None,
     'gpu' : 0,

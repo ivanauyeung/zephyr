@@ -312,7 +312,7 @@ forecasts:
     #  forecast_overrides:
     #    - evaluator=cs
     #    - paths.verification_ll=/home/disk/quicksilver/nacc/Data/ERA5/1deg/1979-2022_era5_1deg_3h_
-    #    - paths.verification=/home/disk/brume/karlbam/Data/DLWP/CS64/era5_1deg_3h_CS64S_1979-2018_
+    #    - paths.verification=/home/disk/brume/karlbam/Data/DLWP/HPX64/era5_1deg_3h_CS64S_1979-2018_
     #    - rescale_das=True
     #    - evaluator.unit_conversion=9.81
     #    - UNCOMMENT THE FORECAST RESCALING
@@ -337,7 +337,7 @@ forecasts:
     #  forecast_overrides:
     #    - evaluator=cs
     #    - paths.verification_ll=/home/disk/quicksilver/nacc/Data/ERA5/1deg/1979-2022_era5_1deg_3h_
-    #    - paths.verification=/home/disk/brume/karlbam/Data/DLWP/CS64/era5_1deg_3h_CS64S_1979-2018_
+    #    - paths.verification=/home/disk/brume/karlbam/Data/DLWP/HPX64/era5_1deg_3h_CS64S_1979-2018_
     #    - rescale_das=True
     #    - analysis.on_latlon=True
     #  analysis_overrides:
@@ -348,7 +348,7 @@ forecasts:
     #  forecast_overrides:
     #    - evaluator=cs
     #    - paths.verification_ll=/home/disk/quicksilver/nacc/Data/ERA5/1deg/1979-2022_era5_1deg_3h_
-    #    - paths.verification=/home/disk/brume/karlbam/Data/DLWP/CS64/era5_1deg_3h_CS64S_1979-2018_
+    #    - paths.verification=/home/disk/brume/karlbam/Data/DLWP/HPX64/era5_1deg_3h_CS64S_1979-2018_
     #    - rescale_das=True
     #    #- transfer_das=True
     #    - analysis.on_latlon=True
@@ -376,7 +376,7 @@ forecasts:
     #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_cs64_u3p_baro_vNone.nc
     #  forecast_overrides:
     #    - evaluator=cs
-    #    - paths.verification=/home/disk/brume/karlbam/Data/DLWP/CS64/era5_1deg_3h_CS64S_1979-2018_
+    #    - paths.verification=/home/disk/brume/karlbam/Data/DLWP/HPX64/era5_1deg_3h_CS64S_1979-2018_
     #    - paths.verification_ll=/home/disk/quicksilver/nacc/Data/ERA5/1deg/1979-2022_era5_1deg_3h_
     #    - rescale_das=True
     #    - transfer_das=False
@@ -387,7 +387,7 @@ forecasts:
     #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_cs64_u3p_baro_vNone.nc
     #  forecast_overrides:
     #    - evaluator=cs
-    #    - paths.verification=/home/disk/brume/karlbam/Data/DLWP/CS64/era5_1deg_3h_CS64S_1979-2018_
+    #    - paths.verification=/home/disk/brume/karlbam/Data/DLWP/HPX64/era5_1deg_3h_CS64S_1979-2018_
     #    - paths.verification_ll=/home/disk/quicksilver/nacc/Data/ERA5/1deg/1979-2022_era5_1deg_3h_
     #    - analysis.on_latlon=False
     #    - rescale_das=True
@@ -432,7 +432,7 @@ forecasts:
     #    - rescale_das=True
     #    - evaluator=cs
     #    - analysis.on_latlon=True
-    #    - paths.verification_ll=/home/disk/brume/karlbam/Data/DLWP/CS64/era5_1deg_3h_CS64S_1979-2018_
+    #    - paths.verification_ll=/home/disk/brume/karlbam/Data/DLWP/HPX64/era5_1deg_3h_CS64S_1979-2018_
 
     #HPX32 6var c90:
     #  forecast_path: DELUSioN/evaluation/forecasts/forecast_06-02-02_hpx_u3p_6var_c90-180-360_vNone.nc

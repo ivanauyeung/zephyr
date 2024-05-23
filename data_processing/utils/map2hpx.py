@@ -13,21 +13,21 @@ from data_processing.remap.healpix import HEALPixRemap
 from data_processing.remap.cubesphere import to_chunked_dataset
 
 EXAMPLE_PARAMS = {
-    'file_name' : '/home/quicksilver2/nacc/Data/pipeline_dev/era5_1950-2022_3h_1deg_sst-ti.nc',
+    'file_name' : '/home/disk/quicksilver2/nacc/Data/pipeline_dev/era5_1950-2022_3h_1deg_sst-ti.nc',
     'target_variable_name' : 'sst', # this is used to extract the DataArray from the Dataset
     'file_variable_name' : 'sst', # this is how the variable will be saved in the new file 
     # this is the "prefix" for the output file. Should include the desired path to the output file
-    'prefix' : '/home/quicksilver2/nacc/Data/pipeline_dev/era5_1deg_3h_HPX32_1950-2022_',
+    'prefix' : '/home/disk/quicksilver2/nacc/Data/pipeline_dev/era5_1deg_3h_HPX32_1950-2022_',
     'nside' : 32,
     'order' : 'bilinear', # order of the interpolation
     'resolution_factor' : 1.0,
     'visualize':False, # This determines whether to visualize remap. Warning: buggy
 }
 EXAMPLE_PARAMS_CONSTANT = {
-    'file_name' : '/home/quicksilver2/nacc/Data/pipeline_dev/era5_1950-2022_3h_1deg_lsm.nc',
+    'file_name' : '/home/disk/quicksilver2/nacc/Data/pipeline_dev/era5_1950-2022_3h_1deg_lsm.nc',
     'target_variable_name' : 'lsm', 
     'file_variable_name' : 'lsm', 
-    'prefix' : '/home/quicksilver2/nacc/Data/pipeline_dev/era5_1deg_3h_HPX32_1950-2022_',
+    'prefix' : '/home/disk/quicksilver2/nacc/Data/pipeline_dev/era5_1deg_3h_HPX32_1950-2022_',
     'nside' : 32,
     'order' : 'bilinear', 
     'resolution_factor' : 1.0,

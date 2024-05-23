@@ -23,7 +23,7 @@ EXAMPLE_CONSTANT = {
     'single_level_variable':True,
     'variable_name':'land_sea_mask',
     'grid':[1.,1.],
-    'target_file':'/home/quicksilver2/nacc/Data/pipeline_dev/era5_1979-2022_3h_1deg_lsm.nc',
+    'target_file':'/home/disk/quicksilver2/nacc/Data/pipeline_dev/era5_1950-2022_3h_1deg_lsm.nc',
 }
 
 def estimate_num_requests(request_dict):
@@ -143,7 +143,7 @@ def main(params):
               'single_level_variable':True,
               'variable_name':'land_sea_mask',
               'grid':[1.,1.],
-              'target_file':'/home/quicksilver2/nacc/Data/pipeline_dev/era5_1979-2022_3h_1deg_lsm.nc',
+              'target_file':'/home/disk/quicksilver2/nacc/Data/pipeline_dev/era5_1950-2022_3h_1deg_lsm.nc',
           }
     """
     

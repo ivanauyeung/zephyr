@@ -69,7 +69,7 @@ class ConvNeXtBlock(th.nn.Module):
                 layer='torch.nn.Conv2d',
                 in_channels=int(latent_channels*upscale_factor),
                 out_channels=out_channels,
-                kernel_size=latent_conv_size,
+                kernel_size=1,
                 dilation=dilation,
                 enable_nhwc=enable_nhwc,
                 enable_healpixpad=enable_healpixpad

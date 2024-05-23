@@ -56,7 +56,7 @@ forecasts:
         - rescale_das=True  # Rescale the forecast (and verification if on native grid)
         - evaluator=cs  # Use the cubed sphere evaluator config
         - analysis.on_latlon=False  # Perform all analyses on native geometry (here CS)
-        - paths.verification=/home/disk/brume/karlbam/Data/DLWP/CS64/era5_1deg_3h_CS64S_1979-2018_
+        - paths.verification=/home/disk/brume/karlbam/Data/DLWP/HPX64/era5_1deg_3h_CS64S_1979-2018_
       analysis_overrides:
         acc:
           - analysis.arguments.climatology_path=null  # Do not take default climatology path but generate it instead

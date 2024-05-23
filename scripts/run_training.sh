@@ -66,7 +66,9 @@ learning_rate=2e-4
 checkpoint_name=Null
 batch_size=14
 model="hpx_rec_unet"
-encoder_conv_block="symmetric_conv_next_block"
+encoder_conv_block="conv_next_block"
+decoder_conv_block="conv_next_block"
+output_layer="basic_conv_block"
 decoder="rec_unet_dec"
 encoder_n_channels="[180,90,90]"
 decoder_n_channels="[90,90,180]"
@@ -86,7 +88,7 @@ NUM_CPU=16
 GPU_NAME=A100
 DEVICE_NUMBERS="2"
 NUMEXPR_MAX_THREADS=128
-EXP_NAME="hpx64_gru_1x1${seed}"
+EXP_NAME="hpx64_gru_3x3${seed}"
 OUTPUT_DIR="/home/disk/brume/adod/zephyr/outputs/${EXP_NAME}"
 OUTPUT_FILE="${OUTPUT_DIR}/output.out"
 JOB_NAME="train_${EXP_NAME}"
@@ -114,7 +116,8 @@ checkpoint_name=${checkpoint_name} \
 batch_size=${batch_size} \
 experiment_name=${EXP_NAME} model=${model} \
  model/modules/blocks@model.encoder.conv_block=${encoder_conv_block} \
- model/modules/decoder@model.decoder=${decoder} \
+ model/modules/blocks@model.decoder.conv_block=${decoder_conv_block} \
+ model/modules/blocks@model.decoder.output_layer=${output_layer} \
   model.encoder.n_channels=${encoder_n_channels} \
   model.decoder.n_channels=${decoder_n_channels} \
   trainer.max_epochs=${max_epochs} \
@@ -123,7 +126,7 @@ experiment_name=${EXP_NAME} model=${model} \
   data.prebuilt_dataset=${prebuilt_dataset} \
   data.module.drop_last=${drop_last} \
   trainer/lr_scheduler=${lr_scheduler} \
-  trainer/optimizer=${optimizer} 
+  trainer/optimizer=${optimizer} \
   model.enable_healpixpad=${enable_healpixpad}"
 
 # Run model
