@@ -332,7 +332,7 @@ class TrailingAverageCoupler():
         averaging_periods = [] 
         for s in self.averaging_slices:
             averaging_periods.append(coupled_fields[:,:,s,:,:,:].mean(dim=2,keepdim=True))
-        self.preset_coupled_fields = th.concat(averaging_periods, dim=3).permute(0,2,3,1,4,5)
+        self.preset_coupled_fields = th.concat(averaging_periods, dim=3).permute(2,0,3,1,4,5)
         # flag for construct integrated coupling method to use this array
         self.coupled_mode = True 
 
