@@ -9,6 +9,7 @@ import numpy as np
 import torch as th
 import torch.distributed as dist
 from torchinfo import summary
+from omegaconf import OmegaConf
 from gradient_descent_the_ultimate_optimizer import gdtuo
 
 import sys
@@ -96,8 +97,16 @@ def train(cfg):
     # Instantiate PyTorch modules (with state dictionaries from checkpoint if given)
     criterion = instantiate(cfg.trainer.criterion)
     optimizer = instantiate(cfg.trainer.optimizer, params=model.parameters())
-    lr_scheduler = instantiate(cfg.trainer.lr_scheduler, optimizer=optimizer) \
-                   if cfg.trainer.lr_scheduler is not None else None
+    # Instantiate series of schedulers if using a chained learning rate
+    if cfg.trainer.lr_scheduler['_target_'] == 'torch.optim.lr_scheduler.ChainedScheduler':
+        schedulers = []
+        for s in cfg.trainer.lr_scheduler['schedulers']: 
+            scheduler_cfg = OmegaConf.create(s)
+            schedulers.append(instantiate(scheduler_cfg, optimizer=optimizer))
+        lr_scheduler = th.optim.lr_scheduler.ChainedScheduler(schedulers)
+    else:
+        lr_scheduler = instantiate(cfg.trainer.lr_scheduler, optimizer=optimizer) \
+                    if cfg.trainer.lr_scheduler is not None else None
     #optimizer = gdtuo.ModuleWrapper(model, optimizer=gdtuo.Adam(gdtuo.SGD(1e-5))).initialize()
 
     # Prepare training under consideration of checkpoint if given
