@@ -2,6 +2,7 @@ import numpy as np
 import xarray as xr
 from omegaconf import OmegaConf, open_dict
 import logging
+from pprint import pprint
 import json
 import os
 import yaml
@@ -43,7 +44,8 @@ def main(params):
     Parameters:
     params (dict): A dictionary with the following keys:
         - 'scale_file': Path to the YAML file containing the scaling parameters.
-        - 'variable_file_prefix': Prefix for the file names containing the variables.
+        - 'variable_file_prefix': Prefix for the file names containing the variables. Can also pass a list of file names. instead
+        - 'variables_files' : list of file names containing the variables,
         - 'variable_names': List of variable names to update.
         - 'selection_dict': Dictionary defining the data subset to use for the calculation.
         - 'overwrite': Whether to overwrite existing scaling parameters.
@@ -54,7 +56,7 @@ def main(params):
     scale_dict = OmegaConf.to_container(OmegaConf.load(params['scale_file']))
 
     # Loop over the variable names
-    for variable_name in params['variable_names']:
+    for i, variable_name in enumerate(params['variable_names']):
         # Check if the variable is already in the scale file
         if variable_name in scale_dict.keys() and not params['overwrite']:
             logging.info(f"{variable_name} is already in {params['scale_file']}. If you wish to overwrite existing value, pass 'overwrite'=True")
@@ -63,7 +65,10 @@ def main(params):
             logging.info(f"Adding {variable_name} to {params['scale_file']}")
 
         # Load the data for the variable
-        da = xr.open_dataset(params['variable_file_prefix'] + variable_name + '.nc',chunks=params['chunks'])[variable_name].sel(params['selection_dict'])
+        if 'variable_file_prefix' in params:
+            da = xr.open_dataset(params['variable_file_prefix'] + variable_name + '.nc',chunks=params['chunks'])[variable_name].sel(params['selection_dict'])
+        else: 
+            da = xr.open_dataset(params['variable_files'][i],chunks=params['chunks'])[variable_name].sel(params['selection_dict'])
 
         # Calculate the mean and standard deviation
         if params['chunks'] is None:
@@ -77,6 +82,8 @@ def main(params):
         scale_dict[variable_name] = { 'mean':mean.item(),'std':std.item() }
 
     # Save the updated scaling parameters
+    print('updating scale dict to:')
+    pprint(scale_dict)
     scale_conf = OmegaConf.create(scale_dict)  
     OmegaConf.save(config = scale_conf, f=params['scale_file'])
 

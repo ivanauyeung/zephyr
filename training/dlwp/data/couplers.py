@@ -298,7 +298,7 @@ class TrailingAverageCoupler():
         # get proper channels from coupled component output 
         output_channels = coupled_module.output_variables
         channel_indices = []
-        # A bit convoluted. Prepared coupled variables 
+        # Prepared coupled variables 
         # are given a suffix for training associated with their 
         # trailing average increment e.g. 'z1000-48H'. To extract 
         # thr proper field from the coupled model output, we see if 

@@ -6,14 +6,14 @@ import pandas as pd
 from tqdm import tqdm 
 
 EXAMPLE_PARAM = {
-    'filename' : 'data_processing/utils/test_input_trailing_average.nc',
-    'variable_name' : 'ws10',
-    'output_variable_name' : 'ws10-48H',
-    'coupled_dt' : '6H',
-    'output_filename' : 'test_trailingAverage.nc',
-    'influence_window' : np.timedelta64(2, 'D'),
-    'chunks' : {'sample':10},
-    'load_first' : False,
+    'filename' : 'data_processing/utils/test_input_trailing_average.nc', # path to intantaneous file 
+    'variable_name' : 'ws10', # name of variable in dataset
+    'output_variable_name' : 'ws10-48H', # name of variable in output dataset
+    'coupled_dt' : '6H', # the time resoluton of the atmos model to be coupled 
+    'output_filename' : 'test_trailingAverage.nc', # output file name including path
+    'influence_window' : np.timedelta64(2, 'D'), # range for averaging 
+    'chunks' : {'sample':10}, # for parallel processing
+    'load_first' : False, # if data can fit in memory, this will speed up calculations 
 }
 
 def main(params):
