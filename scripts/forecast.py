@@ -103,12 +103,6 @@ def inference(args: argparse.Namespace):
         'prefix': args.data_prefix,
         'suffix': args.data_suffix
     }.items() if v is not None}
-    #print('========================================================================')
-    #import json  
-    #readable = json.dumps(OmegaConf.to_container(cfg),indent=4)
-    #print(readable)
-    #exit()
-    #print('========================================================================')
     data_module = instantiate(
         cfg.data.module,
         output_time_dim=output_time_dim,
