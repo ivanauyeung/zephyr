@@ -43,7 +43,7 @@ def main(params, output_file=None):
     Parameters:
     params (dict): A dictionary with the following keys:
         - 'file_name': including absolute path of lat lon file to be remapped.
-        - 'target_variable_name': variable name within netcdf dataset.
+        - 'target_variable_name': variable name to be used in the output dataset.
         - 'file_variable_name': name of variable inside input file.
         - 'target_file_variable_name': name of variable used to create output file name, only if different from 'target_variable_name'.
         - 'prefix': path and file prefix for output file name (to be combined with file_variable_name).
@@ -60,6 +60,7 @@ def main(params, output_file=None):
 
     # get varaible identifier within otuput file name, this should only be different from target_variable_name for topography
     target_file_variable_name = getattr(args,'target_file_variable_name', args.target_variable_name)
+
     # save for later 
     nside = args.nside
     prefix = args.prefix
@@ -78,11 +79,13 @@ def main(params, output_file=None):
                                     f"match.")
 
     # Load .nc file in latlon format to extract latlon information and to initialize the remapper module
-    ds_ll = xr.open_dataset(args.file_name).rename({"time": "sample"}).squeeze()
-    latitudes, longitudes = ds_ll.dims["latitude"], ds_ll.dims["longitude"]
-    # Load .nc file in latlon format to extract latlon information and to initialize the remapper module
-    ds_ll = xr.open_dataset(args.file_name).rename({"time": "sample"}).squeeze()
-    latitudes, longitudes = ds_ll.dims["latitude"], ds_ll.dims["longitude"]
+    ds_ll = xr.open_dataset(args.file_name)
+    if 'time' in xr.open_dataset(args.file_name).dims:
+        ds_ll.rename({"time": "sample"}).squeeze()
+    try:
+        latitudes, longitudes = ds_ll.dims["latitude"], ds_ll.dims["longitude"]
+    except KeyError:
+        latitudes, longitudes = ds_ll.dims["lat"], ds_ll.dims["lon"]
     mapper = HEALPixRemap(
         latitudes=latitudes,
         longitudes=longitudes,
@@ -97,6 +100,7 @@ def main(params, output_file=None):
         prefix=args.prefix,
         file_variable_name=args.file_variable_name,
         target_variable_name=args.target_variable_name,
+        target_file_variable_name=target_file_variable_name,
         poolsize=getattr(args,'pool_size',1),
         chunk_ds=True,
         output_file=output_file,
